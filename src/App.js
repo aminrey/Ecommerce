@@ -5,7 +5,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import './App.css';
 import Header from './components/header/header.component.jsx';
 import SignInAndSignUpPage from './pages/sing-in-and-sign-up/sign-in-and-sign-up.component';
-import { auth } from './firebase/firebase.utils';
+import { auth ,createUserProfileDocument} from './firebase/firebase.utils';
 const HatsPage = () => (
   <div>
     <h1>HATS PAGE </h1>
@@ -25,18 +25,32 @@ class App extends React.Component {
     
   }
  unsubscribeFromAuth = null;
+
+
+
   componentDidMount(){
-    auth.onAuthStateChanged(user=> {
+   this.unsubscribeFromAuth= auth.onAuthStateChanged( async userAuth=> {
+    if(userAuth){
+      const userRef = await createUserProfileDocument(userAuth);
 
-      this.setState({currentUser:user});
-      console.log(user);
-    }); 
+      userRef.onSnapshot(Snapshot=>{
+        this.setState({
+          currentUser:{
+            id:Snapshot.id,
+            ...Snapshot.data()
+          }
+        });
 
-  }
-
-  componentWillUnmount(){
-    this.unsubscribeFromAuth();
+        console.log(this.state);
+      });
+     }
+     
+    this.setState({currentUser:userAuth});
     
+    }); 
+  }
+  componentWillUnmount(){
+  this.unsubscribeFromAuth();
   }
 
   render(){
