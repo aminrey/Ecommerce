@@ -1,7 +1,10 @@
 import React from "react";
+
 import './form-input.styles.scss';
 
+
 const FormInput = ({ handleChange , label,...otherProps } )=>(
+    
 
 
 <div className="group">
@@ -16,11 +19,16 @@ const FormInput = ({ handleChange , label,...otherProps } )=>(
     :null
 
    
-}
 
+}
+{/* >?سشیسشیawsdas */}
 
 </div>
 
 
+
+
+
 )
 export default FormInput;
+

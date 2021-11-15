@@ -4,7 +4,7 @@ import 'firebase/compat/auth';
 
 const config = {
     apiKey: "AIzaSyB_dWNLGdEbxxxU-Kv_51A6sWDdFP7Ss0U",
-
+  
     authDomain: "ecommerce-d4519.firebaseapp.com",
   
     projectId: "ecommerce-d4519",
@@ -26,7 +26,7 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
 
   const userRef = firestore.doc(`users/${userAuth.uid}`);
 
-  const snapShot = await userRef.get();
+  const snapShot = await userRef.get()
 
   if (!snapShot.exists) {
     const { displayName, email } = userAuth;
