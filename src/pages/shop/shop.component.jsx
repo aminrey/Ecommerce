@@ -19,7 +19,6 @@ class ShopPage extends React.Component {
       <div className='shop-page'>
 
 
-       <span>amin</span>
         {collections.map(({ id, ...otherCollectionProps }) => (
           <CollectionPreview key={id} {...otherCollectionProps} />
         ))}
